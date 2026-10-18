@@ -1,65 +1,262 @@
-# Atlas — AI Research Studio
+# 🧠 AI Research Studio
+### Your AI-powered research team — search, analyze, write, and refine.
 
-A polished HTML/CSS/JavaScript frontend for the existing multi-agent research pipeline. The UI talks to a small Flask API, which runs the existing Python agents in the background and exposes live stage/status updates.
+<p align="center">
+  <strong>A multi-agent AI research system that transforms a research question into a structured, comprehensive report.</strong>
+</p>
 
-## What it does
+<p align="center">
+  <a href="https://github.com/PriyankV25/ai-research-studio">
+    <img src="https://img.shields.io/badge/Open%20Source-Contributions%20Welcome-14b8a6?style=for-the-badge&logo=github" alt="Open Source">
+  </a>
+  <img src="https://img.shields.io/badge/AI-Multi--Agent-7c3aed?style=for-the-badge" alt="Multi Agent AI">
+  <img src="https://img.shields.io/badge/LLM-Groq%20%7C%20Ollama-2563eb?style=for-the-badge" alt="Groq and Ollama">
+  <img src="https://img.shields.io/badge/Deployment-Render-46e3b7?style=for-the-badge&logo=render" alt="Render">
+</p>
 
-- Responsive research workspace with animated, accessible UI.
-- Starts a research job from a topic prompt.
-- Shows the four pipeline stages: web search, source reading, report writing, and critic review.
-- Displays the Markdown report and critic feedback when complete.
-- Copy report and export the report as Markdown.
-- Shows local environment configuration status without exposing API keys.
+---
 
-## Setup (Windows PowerShell)
+## ✨ What is AI Research Studio?
 
-Use Python 3.12 or another Python version supported by your project's dependencies. Open PowerShell in this folder:
+AI Research Studio is an open-source, multi-agent AI application designed to make research more accessible and efficient.
 
-```powershell
-uv venv
-.venv\Scripts\Activate.ps1
-uv pip install -r requirements.txt
+Instead of relying on a single AI response, the application organizes research into specialized stages. Agents collaborate to gather information, analyze relevant content, generate a report, and review the result.
+
+Use a hosted LLM through **Groq** or run a compatible open-weight model locally using **Ollama**.
+
+🎯 **The goal:** Turn a simple research topic into a useful, structured report with less manual effort.
+
+## 🚀 Key Features
+
+| Feature | Description |
+|---|---|
+| 🔎 Search Agent | Finds relevant web information using the configured search tools. |
+| 📖 Reader Agent | Processes retrieved content and extracts useful insights. |
+| ✍️ Writer Agent | Organizes research into a readable report. |
+| 🛡️ Critic Agent | Reviews the generated report and suggests improvements. |
+| 🤖 Multi-agent workflow | Separates research responsibilities into specialized stages. |
+| ⚡ Groq integration | Uses cloud-hosted language models for inference. |
+| 🏠 Ollama support | Enables local inference with compatible open-weight models. |
+| 🌐 Web interface | Provides a convenient interface for submitting research topics and viewing results. |
+| 📊 Workflow visibility | Designed to make the research process easier to follow. |
+| ☁️ Cloud deployment | Can be deployed to Render using the repository's deployment configuration. |
+| 🧩 Extensible architecture | Offers a foundation for adding agents, tools, and model providers. |
+
+> Feature availability depends on the current implementation and configuration in the repository.
+
+## 🧭 How It Works
+
+```mermaid
+flowchart TD
+    A["💡 Research Question"] --> B["🔎 Search Agent"]
+    B --> C["📖 Reader Agent"]
+    C --> D["✍️ Writer Agent"]
+    D --> E["🛡️ Critic Agent"]
+    E --> F["📄 Research Report"]
+
+    G["🌐 Tavily Search"] --> B
+    H["🕸️ Web Scraping"] --> B
+    I["⚡ Groq Cloud LLM"] -.-> B
+    I -.-> C
+    I -.-> D
+    I -.-> E
+    J["🏠 Ollama Local LLM"] -.-> B
+    J -.-> C
+    J -.-> D
+    J -.-> E
 ```
 
-Create a `.env` file in the project root (do not commit it):
+### The four research stages
 
-```env
+1. **Search:** Gather relevant information from web sources.
+2. **Read:** Analyze retrieved material and identify important findings.
+3. **Write:** Turn the findings into a structured research report.
+4. **Critique:** Review the report for clarity, relevance, and quality.
+
+The generated report should still be checked against its original sources. AI-generated content can contain inaccuracies, incomplete citations, or outdated information.
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Core application logic |
+| Flask | Web application backend |
+| HTML, CSS and JavaScript | Frontend interface |
+| LangChain | LLM integration and agent components |
+| LangGraph | Workflow orchestration, if enabled in the implementation |
+| Groq | Cloud LLM inference |
+| Ollama | Local model inference |
+| Tavily | Web search |
+| BeautifulSoup | HTML parsing and web-content extraction |
+| Git and GitHub | Version control and collaboration |
+| Render | Cloud application hosting |
+
+## 📋 Prerequisites
+
+Before starting, install or obtain the following:
+
+- **Python 3.12 recommended** for a broadly compatible development environment.
+- **Git** to clone and manage the repository.
+- A code editor such as Visual Studio Code.
+- A **Groq API key** for cloud inference, available through the [Groq Console](https://console.groq.com/).
+- A **Tavily API key** for web search, available through [Tavily](https://tavily.com/).
+- **Ollama** (optional) if you want to run supported models locally.
+- A **Render account** if you want to deploy the application online.
+
+You do not need Ollama if you plan to use Groq exclusively. Likewise, local development does not require a Render account.
+
+## ⚡ Quick Start — Windows
+
+### 1. Clone the repository
+
+Open PowerShell or Git Bash:
+
+```bash
+git clone https://github.com/PriyankV25/ai-research-studio.git
+cd ai-research-studio
+```
+
+### 2. Create a virtual environment
+
+**PowerShell:**
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+**Git Bash:**
+
+```bash
+py -3.12 -m venv .venv
+source .venv/Scripts/activate
+```
+
+If Python 3.12 is not installed, install it first or use another Python version supported by the project's dependencies.
+
+### 3. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+
+Create your local environment file from the example:
+
+**PowerShell:**
+
+```powershell
+Copy-Item .env.example .env
+```
+
+**Git Bash:**
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your preferred model provider and API credentials.
+
+```dotenv
+# LLM Provider: groq or ollama
+LLM_PROVIDER=groq
+
+# Groq cloud configuration
 GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=openai/gpt-oss-120b
+
+# Tavily web search
 TAVILY_API_KEY=your_tavily_api_key
+
+# Optional Ollama configuration
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=qwen3:8b
 ```
 
-Then run:
+**Important:** The model ID shown above is an example. Use a model currently available to your Groq account. The `.env` file must remain private and must never be committed to GitHub.
 
-```powershell
+### 5. Start the application
+
+```bash
 python app.py
 ```
 
-Open http://127.0.0.1:5000 in your browser.
+Open the local address shown by the application. If it uses Flask's default development port, try:
 
-## Important notes
+http://127.0.0.1:5000
 
-- The `.env` file and `.venv` are intentionally not included in this package. Keep your keys private.
-- This is intended for local development. Do not expose the Flask development server directly to the public internet.
-- The status API reports the stage that the existing pipeline has reached; it does not stream token-by-token output.
-- Source websites may block scraping or return limited content. The report is AI-generated and should be fact-checked before being used for high-stakes decisions.
-- The UI uses Google Fonts and CDN-hosted Marked/DOMPurify. The interface still loads without those libraries, but Markdown rendering will be more basic if the CDN is unavailable.
+For local development, use Flask's development server. Do not expose it directly to the public internet.
 
+---
 
-## Deploy to Render
+## ⚡ Choose Your AI Model Provider
 
-1. Push this folder to a GitHub repository. Do not commit `.env`, API keys, or `.venv`.
-2. In Render, choose **New + → Blueprint** and select the repository containing `render.yaml`, or create a **Web Service** manually.
-3. For a manual Web Service, use:
-   - Runtime: Python
-   - Build command: `pip install -r requirements.txt`
-   - Start command: `gunicorn app:app --workers 1 --threads 8 --timeout 180`
-4. Add `GROQ_API_KEY` and `TAVILY_API_KEY` under the Render service's Environment settings. Keep `LLM_PROVIDER=groq` for the hosted app.
-5. Deploy and check `/api/health` on your deployed URL.
+AI Research Studio supports two model-running approaches through its provider configuration.
 
-### Provider options
+### Option A — Groq cloud inference
 
-- Local users can set `LLM_PROVIDER=ollama`, install Ollama, pull a model, and use `OLLAMA_BASE_URL=http://localhost:11434`.
-- A Render-hosted service cannot access Ollama running on a visitor's own computer via `localhost`. For Ollama on a hosted deployment, configure an Ollama endpoint that is securely reachable from Render.
-- Keep credentials in Render Environment settings and never commit `.env`.
+Groq runs supported language models through a hosted API. Your application sends model requests to Groq, so you do not need to download large model files to your computer.
 
-The Flask job state is stored in memory and can be lost on restarts or redeploys. This starter uses one Gunicorn worker to avoid splitting in-memory job state across worker processes. For a production multi-worker setup, move job state to a shared store and use a background job queue.
+**Setup**
+
+1. Create an account at [Groq Console](https://console.groq.com/).
+2. Generate an API key.
+3. Add the key to your `.env` file.
+4. Set the provider to `groq`.
+5. Choose an available model ID.
+
+```dotenv
+LLM_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=openai/gpt-oss-120b
+```
+
+**Advantages**
+
+- No large local model download.
+- Convenient for hosted deployments.
+- Model inference runs on the provider's infrastructure.
+- Suitable for experimenting with multi-agent workflows.
+
+API availability, model access, usage limits, and pricing depend on the provider and your account.
+
+### Option B — Ollama local inference
+
+[Ollama](https://ollama.com/) lets you run supported open-weight models on your own computer. This can reduce dependence on a cloud LLM API, although local hardware and model licenses still matter.
+
+**1. Install Ollama**
+
+Download and install it from [ollama.com](https://ollama.com/).
+
+**2. Download a model**
+
+For example:
+
+```bash
+ollama pull qwen3:8b
+```
+
+**3. Verify that the model is available**
+
+```bash
+ollama list
+```
+
+**4. Update `.env`**
+
+```dotenv
+LLM_PROVIDER=ollama
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=qwen3:8b
+TAVILY_API_KEY=your_tavily_api_key
+```
+
+**5. Run the application**
+
+```bash
+python app.py
+```
+
+Make sure Ollama is
